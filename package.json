@@ -1,0 +1,11 @@
+{
+  "name": "node_file_manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "author": "Vladimir Milashevsky",
+  "license": "ISC"
+}
