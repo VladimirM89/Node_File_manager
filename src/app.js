@@ -1,6 +1,8 @@
 import * as readline from "node:readline/promises";
+import os from "os";
 import {
   EXIT_WORD,
+  INVALID_INPUT_TEXT,
   LINE_START_SYMBOL,
   OPERATION_FAILED_TEXT,
 } from "./constants/stringConstants.js";
@@ -8,6 +10,20 @@ import getUsername from "./utils/getUsername.js";
 import printGreeting from "./utils/showGreeting.js";
 import handleExitApp from "./utils/handleExitApp.js";
 import printCurrentDirectory from "./utils/printCurrentDirectory.js";
+import changeDir from "./utils/changeDir.js";
+import {
+  ALL_CLI_COMMANDS,
+  COMPRESS_COMMANDS,
+  DIRECTORY_COMMANDS,
+  FILE_COMMANDS,
+  HASH_COMMANDS,
+  OS_COMMANDS,
+} from "./constants/cliCommands.js";
+import directoryHandler from "./handlers/directoryHandler.js";
+import osHandler from "./handlers/osHandler.js";
+import hashHandler from "./handlers/hashHandler.js";
+import compressHandler from "./handlers/compressHandler.js";
+import filesystemHandler from "./handlers/filesystemHandler.js";
 
 async function app() {
   try {
@@ -19,11 +35,24 @@ async function app() {
       prompt: LINE_START_SYMBOL,
     });
 
+    changeDir(os.homedir());
+
     printGreeting(userName);
     printCurrentDirectory();
     rl.prompt();
 
     rl.on("line", (msg) => {
+      const command = msg.split(" ")[0];
+      const lowercaseCommand = command.toLocaleLowerCase();
+
+      if (Object.values(DIRECTORY_COMMANDS).includes(lowercaseCommand)) directoryHandler(msg);
+      if (Object.values(FILE_COMMANDS).includes(lowercaseCommand)) filesystemHandler(msg);
+      if (msg.includes(OS_COMMANDS.OS)) osHandler(msg);
+      if (msg.includes(HASH_COMMANDS.HASH)) hashHandler(msg);
+      if (Object.values(COMPRESS_COMMANDS).includes(lowercaseCommand)) compressHandler(msg);
+      if (!Object.values(ALL_CLI_COMMANDS).includes(lowercaseCommand))
+        process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
+
       if (msg.toString().trim() === EXIT_WORD) {
         process.exit();
       }

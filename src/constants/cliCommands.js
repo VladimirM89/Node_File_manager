@@ -23,5 +23,13 @@ export const HASH_COMMANDS = {
 
 export const COMPRESS_COMMANDS = {
   COMPRESS: "compress",
-  DECOMPRESS: "DECOMPRESS",
+  DECOMPRESS: "decompress",
+};
+
+export const ALL_CLI_COMMANDS = {
+  ...DIRECTORY_COMMANDS,
+  ...FILE_COMMANDS,
+  ...OS_COMMANDS,
+  ...HASH_COMMANDS,
+  ...COMPRESS_COMMANDS,
 };

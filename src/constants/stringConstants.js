@@ -12,3 +12,4 @@ export const ACTION_SHUTDOWN = "shutdown";
 export const EXIT_WORD = ".exit";
 export const OPERATION_FAILED_TEXT = "Operation failed";
 export const CURRENT_DIR_TEXT = "You are currently in";
+export const INVALID_INPUT_TEXT = "You input invalid command. Please try again...";
