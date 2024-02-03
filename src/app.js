@@ -50,7 +50,7 @@ async function app() {
       if (msg.includes(OS_COMMANDS.OS)) osHandler(msg);
       if (msg.includes(HASH_COMMANDS.HASH)) hashHandler(msg);
       if (Object.values(COMPRESS_COMMANDS).includes(lowercaseCommand)) compressHandler(msg);
-      if (!Object.values(ALL_CLI_COMMANDS).includes(lowercaseCommand))
+      if (!Object.values(ALL_CLI_COMMANDS).includes(lowercaseCommand) && !msg.includes(EXIT_WORD))
         process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
 
       if (msg.toString().trim() === EXIT_WORD) {
