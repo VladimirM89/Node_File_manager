@@ -5,6 +5,6 @@ export default class OperationError extends Error {
     super(message);
     this.message = OPERATION_FAILED_TEXT;
     this.stack = 0;
-    this.name = 'OperationError';
+    this.name = "OperationError";
   }
 }

@@ -1,7 +1,7 @@
-import { join, dirname } from 'path';
+import { join, dirname } from "path";
 
-export function getPathToFile(currentFilePath, innerFolders = '', dstFileName) {
+export default function getPathToFile(currentFilePath, dstFileName, innerFolders = "") {
   const nameDir = dirname(currentFilePath);
   const dstFilePath = join(nameDir, innerFolders, dstFileName);
   return dstFilePath;
-};
+}
