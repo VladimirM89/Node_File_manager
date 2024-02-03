@@ -23,6 +23,7 @@
     "no-process-exit": "off",
     "class-methods-use-this": "off",
     "no-use-before-define": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "consistent-return": "off"
   }
 }

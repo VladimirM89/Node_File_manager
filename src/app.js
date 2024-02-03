@@ -1,64 +1,44 @@
-import { Worker } from "node:worker_threads";
 import * as readline from "node:readline/promises";
-import { fileURLToPath } from "url";
 import {
-  ACTION_SHUTDOWN,
   EXIT_WORD,
-  GOODBYE_MSG,
   LINE_START_SYMBOL,
   OPERATION_FAILED_TEXT,
 } from "./constants/stringConstants.js";
-import getPathToFile from "./utils/handlePaths.js";
+import getUsername from "./utils/getUsername.js";
+import printGreeting from "./utils/showGreeting.js";
+import handleExitApp from "./utils/handleExitApp.js";
+import printCurrentDirectory from "./utils/printCurrentDirectory.js";
 
-function app() {
+async function app() {
   try {
+    const userName = getUsername(process.argv.slice(2));
+
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       prompt: LINE_START_SYMBOL,
     });
 
-    let userName;
+    printGreeting(userName);
+    printCurrentDirectory();
+    rl.prompt();
+
     rl.on("line", (msg) => {
       if (msg.toString().trim() === EXIT_WORD) {
-        handleExitApp(userName);
+        process.exit();
       }
+      printCurrentDirectory();
       rl.prompt();
     });
 
     rl.on("SIGINT", () => {
-      handleExitApp(userName);
+      process.exit();
     });
 
-    const pathGreetingFile = getPathToFile(
-      fileURLToPath(import.meta.url),
-      "Greeting.js",
-      "components/Greeting",
-    );
-    const greetingWt = new Worker(pathGreetingFile, { argv: process.argv });
-
-    greetingWt.on("message", (msg) => {
-      rl.write(`${msg.message}`);
-
-      userName = msg.username;
-
-      if (msg.action === ACTION_SHUTDOWN) {
-        process.exit();
-      }
-    });
-
-    greetingWt.on("error", () => {
-      console.log(`${OPERATION_FAILED_TEXT}`);
-      rl.prompt();
-    });
+    process.on("exit", () => handleExitApp(userName));
   } catch (error) {
-    console.log(`${error.message}\n${LINE_START_SYMBOL}`);
+    process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
   }
-}
-
-function handleExitApp(username) {
-  console.log(`${GOODBYE_MSG}, ${username}, goodbye!`);
-  process.exit();
 }
 
 app();
