@@ -1,5 +1,6 @@
 import { USERNAME_TEMPLATE, ARGS_PREFIX, SEPARATOR, GREETING_MSG, INCORRECT_NAME_FORMAT_MSG, ACTION_SHUTDOWN, ACTION_PROCEED } from "../../constants/stringConstants.js";
 import { parentPort } from 'node:worker_threads';
+import OperationError from "../../utils/customError.js";
 
 function printGreeting() {
   const inputArgs = process.argv.slice(2);

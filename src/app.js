@@ -39,10 +39,10 @@ function app() {
     });
 
     greetingWt.on('error', () => {
-      throw new OperationError();
+      console.log(`${OPERATION_FAILED_TEXT}`);
+      rl.prompt();
     });
 
-    throw new OperationError();
 
   } catch(error) {
     console.log(`${error.message}\n${LINE_START_SYMBOL}`);
