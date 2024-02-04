@@ -33,3 +33,7 @@ export const ALL_CLI_COMMANDS = {
   ...HASH_COMMANDS,
   ...COMPRESS_COMMANDS,
 };
+
+export const ADDITIONAL_COMMANDS = {
+  TILDE: "~",
+};

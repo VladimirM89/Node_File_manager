@@ -13,3 +13,7 @@ export const EXIT_WORD = ".exit";
 export const OPERATION_FAILED_TEXT = "Operation failed";
 export const CURRENT_DIR_TEXT = "You are currently in";
 export const INVALID_INPUT_TEXT = "You input invalid command. Please try again...";
+export const EMPTY_FOLDER_MESSAGE = "Empty folder";
+export const FOLDER_NOT_EXIST_MESSAGE = "Folder not exists";
+export const FOLDER = "folder";
+export const FILE = "file";
