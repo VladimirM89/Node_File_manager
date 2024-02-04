@@ -52,10 +52,10 @@ async function app() {
       if (Object.values(FILE_COMMANDS).includes(lowercaseCommand))
         await filesystemHandler(msgInCorrectFormat);
       if (msg.includes(OS_COMMANDS.OS)) osHandler(msgInCorrectFormat);
-      if (msg.includes(HASH_COMMANDS.HASH)) hashHandler(msg);
+      if (msg.includes(HASH_COMMANDS.HASH)) await hashHandler(msgInCorrectFormat);
       if (Object.values(COMPRESS_COMMANDS).includes(lowercaseCommand)) compressHandler(msg);
-      if (!Object.values(ALL_CLI_COMMANDS).includes(lowercaseCommand) && !msg.includes(EXIT_WORD))
-        process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
+      // if (!Object.values(ALL_CLI_COMMANDS).includes(lowercaseCommand) && !msg.includes(EXIT_WORD))
+      //   process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
 
       if (msg.trim() === EXIT_WORD) {
         process.exit();

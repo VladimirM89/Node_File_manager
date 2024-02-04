@@ -33,7 +33,7 @@ async function directoryHandler(value) {
         await handleList();
         break;
       default:
-        process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
+        // process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
     }
   } catch {
     process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
