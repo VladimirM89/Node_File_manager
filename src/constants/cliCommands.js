@@ -15,6 +15,11 @@ export const FILE_COMMANDS = {
 
 export const OS_COMMANDS = {
   OS: "os",
+  OEL: "--oel",
+  CPUS: "--cpus",
+  HOMEDIR: "--homedir",
+  USERNAME: "--username",
+  ARCH: "--architecture",
 };
 
 export const HASH_COMMANDS = {

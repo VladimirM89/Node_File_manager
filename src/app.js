@@ -51,7 +51,7 @@ async function app() {
         await directoryHandler(msgInCorrectFormat);
       if (Object.values(FILE_COMMANDS).includes(lowercaseCommand))
         await filesystemHandler(msgInCorrectFormat);
-      if (msg.includes(OS_COMMANDS.OS)) osHandler(msg);
+      if (msg.includes(OS_COMMANDS.OS)) osHandler(msgInCorrectFormat);
       if (msg.includes(HASH_COMMANDS.HASH)) hashHandler(msg);
       if (Object.values(COMPRESS_COMMANDS).includes(lowercaseCommand)) compressHandler(msg);
       if (!Object.values(ALL_CLI_COMMANDS).includes(lowercaseCommand) && !msg.includes(EXIT_WORD))
