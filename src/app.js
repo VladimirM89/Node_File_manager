@@ -24,6 +24,7 @@ import osHandler from "./handlers/osHandler.js";
 import hashHandler from "./handlers/hashHandler.js";
 import compressHandler from "./handlers/compressHandler.js";
 import filesystemHandler from "./handlers/filesystemHandler.js";
+import { handleInputByUser } from "./utils/handlePaths.js";
 
 async function app() {
   try {
@@ -42,10 +43,14 @@ async function app() {
     rl.prompt();
 
     rl.on("line", async (msg) => {
-      const command = msg.split(" ")[0];
+      const msgInCorrectFormat = handleInputByUser(msg);
+      const command = msgInCorrectFormat.split(" ")[0];
       const lowercaseCommand = command.toLocaleLowerCase();
-      if (Object.values(DIRECTORY_COMMANDS).includes(lowercaseCommand)) await directoryHandler(msg);
-      if (Object.values(FILE_COMMANDS).includes(lowercaseCommand)) filesystemHandler(msg);
+
+      if (Object.values(DIRECTORY_COMMANDS).includes(lowercaseCommand))
+        await directoryHandler(msgInCorrectFormat);
+      if (Object.values(FILE_COMMANDS).includes(lowercaseCommand))
+        await filesystemHandler(msgInCorrectFormat);
       if (msg.includes(OS_COMMANDS.OS)) osHandler(msg);
       if (msg.includes(HASH_COMMANDS.HASH)) hashHandler(msg);
       if (Object.values(COMPRESS_COMMANDS).includes(lowercaseCommand)) compressHandler(msg);

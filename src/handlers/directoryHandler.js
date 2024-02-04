@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { sep, parse, resolve, normalize, join } from "path";
+import { sep, parse, normalize, join } from "path";
 import { readdir, stat } from "fs/promises";
 import os from "os";
 import { ADDITIONAL_COMMANDS, DIRECTORY_COMMANDS } from "../constants/cliCommands.js";
@@ -65,7 +65,7 @@ async function handleChangeDir(path) {
       changeDir(os.homedir());
       return;
     }
-    changeDir(resolve(normalize(path)));
+    changeDir(normalize(path));
   } catch {
     process.stdout.write(`${FOLDER_NOT_EXIST_MESSAGE}\n`);
     process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
@@ -76,7 +76,6 @@ async function handleList() {
   try {
     const list = await readdir(process.cwd());
     if (list.length) {
-      console.log("\n");
       const listObject = [];
 
       for (const item of list) {

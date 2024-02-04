@@ -1,4 +1,4 @@
-import { join, dirname } from "path";
+import { join, dirname, normalize } from "path";
 
 export function getPathToFile(currentFilePath, dstFileName, innerFolders = "") {
   const nameDir = dirname(currentFilePath);
@@ -6,7 +6,8 @@ export function getPathToFile(currentFilePath, dstFileName, innerFolders = "") {
   return dstFilePath;
 }
 
-export function getCurrentDirectory(currentFilePath) {
-  const nameDir = dirname(currentFilePath);
-  return nameDir;
+export function handleInputByUser(value) {
+  const arrayValue = value.split(" ");
+  const trimArray = arrayValue.filter((item) => item.length);
+  return trimArray.join(" ");
 }
