@@ -26,8 +26,7 @@ async function compressHandler(value) {
       default:
         process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
     }
-  } catch (err) {
-    console.log(err);
+  } catch {
     process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
   }
 }

@@ -40,8 +40,7 @@ async function filesystemHandler(value) {
       default:
         process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
     }
-  } catch (err) {
-    console.log(err);
+  } catch {
     process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
   }
 }
@@ -104,7 +103,6 @@ async function copyFile([pathToCurrentFile, pathToNewDir]) {
 }
 
 async function deleteFile([pathToCurrentFile]) {
-  console.log(normalize(pathToCurrentFile));
   await unlink(normalize(pathToCurrentFile));
 }
 
