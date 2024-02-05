@@ -40,7 +40,8 @@ async function filesystemHandler(value) {
       default:
         process.stdout.write(`${INVALID_INPUT_TEXT}\n`);
     }
-  } catch {
+  } catch (err) {
+    console.log(err);
     process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
   }
 }
@@ -50,30 +51,22 @@ export default filesystemHandler;
 async function handleReadFile(pathToFile) {
   const normalizePath = normalize(pathToFile);
 
-  // try {
   const data = createReadStream(normalizePath);
   data.on("open", () => process.stdout.write("\n"));
   data.on("end", () => process.stdout.write("\n\n"));
 
   await pipeline(data, process.stdout, { end: false });
-  // } catch {
-  //   process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
-  // }
 }
 
 async function addEmptyFile(fileName) {
   const pathToNewFile = join(process.cwd(), fileName);
 
-  // try {
   try {
     await writeFile(pathToNewFile, "", { flag: "wx" });
   } catch {
     process.stdout.write(`${FILE_EXIST_TEXT}\n`);
     throw new Error();
   }
-  // } catch {
-  //   process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
-  // }
 }
 
 async function renameFile(value) {
@@ -98,7 +91,6 @@ async function renameFile(value) {
 }
 
 async function copyFile([pathToCurrentFile, pathToNewDir]) {
-  // try {
   const pathToCurrentFileNormalize = normalize(pathToCurrentFile);
   const pathToNewDirNormalize = normalize(pathToNewDir);
 
@@ -109,20 +101,15 @@ async function copyFile([pathToCurrentFile, pathToNewDir]) {
   const writeStream = createWriteStream(newFilePath, { flags: "wx" });
 
   await pipeline(readStream, writeStream);
-  // } catch {
-  //   process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
-  // }
 }
 
 async function deleteFile([pathToCurrentFile]) {
+  console.log(normalize(pathToCurrentFile));
   await unlink(normalize(pathToCurrentFile));
 }
 
 async function moveFile([pathToCurrentFile, pathToNewDir]) {
   await copyFile([pathToCurrentFile, pathToNewDir]);
-  // try {
-  await deleteFile(pathToCurrentFile);
-  // } catch {
-  //   process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
-  // }
+
+  await unlink(normalize(pathToCurrentFile));
 }
