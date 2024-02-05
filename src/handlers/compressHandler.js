@@ -1,4 +1,4 @@
-import { join, normalize, resolve, parse } from "path";
+import { join, normalize, parse } from "path";
 import { createReadStream, createWriteStream } from "fs";
 import { createBrotliCompress, createBrotliDecompress } from "zlib";
 import { pipeline } from "stream/promises";
