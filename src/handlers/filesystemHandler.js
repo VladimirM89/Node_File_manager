@@ -8,6 +8,8 @@ import {
   OPERATION_FAILED_TEXT,
   LINE_START_SYMBOL,
   FILE_EXIST_TEXT,
+  SPECIAL_SYMBOLS_REGEXP,
+  NOT_CONTAIN_SPEC_CHARS_TEXT,
 } from "../constants/stringConstants.js";
 
 async function filesystemHandler(value) {
@@ -75,15 +77,24 @@ async function addEmptyFile(fileName) {
 }
 
 async function renameFile(value) {
-  // try {
-  const pathToFile = normalize(value[0]);
-  const dirnameFile = dirname(pathToFile);
-  const newFilePath = join(dirnameFile, value[1]);
+  try {
+    const pathToFile = normalize(value[0]);
+    const fileExtension = parse(pathToFile).ext;
+    const dirnameFile = dirname(pathToFile);
 
-  await rename(pathToFile, newFilePath);
-  // } catch {
-  //   process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
-  // }
+    const newFileName = value[1];
+
+    if (SPECIAL_SYMBOLS_REGEXP.test(newFileName)) {
+      process.stdout.write(`${NOT_CONTAIN_SPEC_CHARS_TEXT}\n`);
+      throw new Error();
+    }
+
+    const newFilePath = join(dirnameFile, newFileName);
+
+    await rename(pathToFile, `${newFilePath}${fileExtension}`);
+  } catch {
+    process.stdout.write(`${OPERATION_FAILED_TEXT}\n${LINE_START_SYMBOL}`);
+  }
 }
 
 async function copyFile([pathToCurrentFile, pathToNewDir]) {

@@ -18,3 +18,5 @@ export const FILE_EXIST_TEXT = "File exist";
 export const FOLDER_NOT_EXIST_MESSAGE = "Folder not exists";
 export const FOLDER = "folder";
 export const FILE = "file";
+export const SPECIAL_SYMBOLS_REGEXP = /[/\\:*?"<>|]/;
+export const NOT_CONTAIN_SPEC_CHARS_TEXT = `File name should not contain: : / \\ : * ? " < > |`;
