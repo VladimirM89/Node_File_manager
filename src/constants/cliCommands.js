@@ -15,7 +15,7 @@ export const FILE_COMMANDS = {
 
 export const OS_COMMANDS = {
   OS: "os",
-  OEL: "--oel",
+  OEL: "--eol",
   CPUS: "--cpus",
   HOMEDIR: "--homedir",
   USERNAME: "--username",
