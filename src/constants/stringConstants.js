@@ -1,0 +1,23 @@
+export const ARGS_PREFIX = "--";
+export const SEPARATOR = "=";
+export const LINE_START_SYMBOL = "> ";
+export const USERNAME_TEMPLATE = "username";
+export const GREETING_MSG = "Welcome to the File Manager";
+export const GOODBYE_MSG = "Thank you for using File Manager";
+export const INCORRECT_NAME_FORMAT_MSG =
+  'Please enter name in correct format: "--username=Your_name"';
+export const UNKNOWN_USER_TEXT = "Unknown user";
+export const ACTION_PROCEED = "proceed";
+export const ACTION_SHUTDOWN = "shutdown";
+export const EXIT_WORD = ".exit";
+export const OPERATION_FAILED_TEXT = "Operation failed";
+export const CURRENT_DIR_TEXT = "You are currently in";
+export const INVALID_INPUT_TEXT = "You input invalid command. Please try again...";
+export const EMPTY_FOLDER_MESSAGE = "Empty folder";
+export const FILE_EXIST_TEXT = "File exist or operation not permitted";
+export const FOLDER_NOT_EXIST_MESSAGE = "Folder not exists";
+export const FOLDER = "folder";
+export const FILE = "file";
+export const BROTLI_ALG_EXTENSION = "br";
+export const SPECIAL_SYMBOLS_REGEXP = /[/\\:*?"<>|]/;
+export const NOT_CONTAIN_SPEC_CHARS_TEXT = `File name should not contain: : / \\ : * ? " < > |`;
